@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, collection, addDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAQ-kOtfQjI3IiSU-Df4p4yKGJqYE9AVm0",
@@ -14,31 +14,17 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig)
-
 const db = getFirestore(app);
 
-function submitForm() {
-  // Obtiene los valores de los campos del formulario
-  var username = document.getElementById("name").value;
-  var email = document.getElementById("email").value;
+const reference = collection(db, 'users');
 
-  // Crea un objeto JSON con los datos del formulario
-  var data = {
-    username: username,
-    email: email,
-  };
-
-  // Envía los datos a la base de datos de Firebase
-  db.collection("users").add(data);
-}
-
-// Agrega un evento de clic al botón de envío
-/*document.getElementById("send").addEventListener("click", function(){
-  console.log("hello")
-});*/
-document.getElementById("send").addEventListener("click", function(){
+document.getElementById("send").addEventListener("click", function () {
   var usame = document.getElementById("name").value;
   var emal = document.getElementById("email").value;
-  console.log(usame,emal)
-  /*submitForm()*/
+  console.log(usame, emal)
+
+  addDoc(reference, {
+    name: usame,
+    email: emal,
+  })
 });

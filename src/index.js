@@ -21,10 +21,15 @@ const reference = collection(db, 'users');
 document.getElementById("send").addEventListener("click", function () {
   var usame = document.getElementById("name").value;
   var emal = document.getElementById("email").value;
+  if(usame=="" || emal==""){
+    alert("Please, enter your your info")
+  } else{
+    alert("Your have claimed your discount!")
   console.log(usame, emal)
 
   addDoc(reference, {
     name: usame,
     email: emal,
   })
+  }
 });

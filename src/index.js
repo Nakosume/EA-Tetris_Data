@@ -21,6 +21,7 @@ const reference = collection(db, 'users');
 document.getElementById("send").addEventListener("click", function () {
   var usame = document.getElementById("name").value;
   var emal = document.getElementById("email").value;
+  const d = new Date();
   if(usame=="" || emal==""){
     alert("Please, enter your your info")
   } else{
@@ -30,6 +31,7 @@ document.getElementById("send").addEventListener("click", function () {
   addDoc(reference, {
     name: usame,
     email: emal,
+    date: d,
   })
   }
 });
